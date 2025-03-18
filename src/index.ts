@@ -1,5 +1,7 @@
-import { Context, Schema } from 'koishi'
+import { Context, Schema ,h } from 'koishi'
 import puppeteer from 'puppeteer';
+import { pathToFileURL } from 'url'
+import { resolve } from 'path'
 
 export const name = 'dustloop'
 
@@ -15,9 +17,11 @@ export function apply(ctx: Context) {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
         await page.goto('https://forum.koishi.xyz/'); // 打开页面
-        const element = await page.waitForSelector('#main-outlet')
+        const element = await page.waitForSelector('#d-sidebar')
+        // const imagePath = path.resolve(process.cwd(), 'static/example.png');
         await element.screenshot({path: './static/example.png'}); // path: 截屏文件保存路径
         await browser.close();
+        await session.send(h.image(pathToFileURL(resolve(__dirname, '../../../static/example.png')).href));
       })();
     }
   })
