@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h3>5a</h3>
+    </div>
+    <div class="main-container">
+        123123
+    </div>
+    <div>
+        <h3>6a</h3>
+    </div>
+    <div class="main-container">
+        123123234
+    </div>
+<script>
+function getMainContainerByH3Content(h3Content) {
+    const h3Elements = document.querySelectorAll('h3');
+    for (const h3 of h3Elements) {
+        if (h3.textContent === h3Content) {
+            let currentElement = h3.parentElement;
+            while (currentElement.nextElementSibling) {
+                if (currentElement.nextElementSibling.classList.contains('main-container')) {
+                    return currentElement.nextElementSibling;
+                }
+                currentElement = currentElement.nextElementSibling;
+            }
+        }
+    }
+    return null;
+}
+</script>
+</body>
+</html>
